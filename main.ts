@@ -3,10 +3,10 @@ import { exists } from "https://deno.land/std/fs/exists.ts";
 
 const req = async () => {
   const resp = await fetch("https://api.github.com/users/denoland");
-  console.log("fetched :", resp.status, await resp.json());
+  console.log(`fetched: ${resp.status}, body id=${(await resp.json())?.id}`);
 };
 
-const run = async () => {
+const run = async (): Promise<number> => {
   await req();
   const filename = Deno.args[0];
   if (!(await exists(filename))) {
@@ -17,9 +17,10 @@ const run = async () => {
   for await (const line of readLines(fileReader)) {
     console.log("==> ", line);
   }
+  return 0;
 };
 
 const main = async () => {
-  await run(); //TODO :set exit code
+  Deno.exit(await run());
 };
 main();

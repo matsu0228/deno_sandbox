@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "test": {
+      "desc": "Run tests",
+      "cmd": "deno test --allow-env --allow-read"
+    },
+    "typecheck": {
+      "desc": "Run type checking",
+      "cmd": "deno cache mod.ts"
+    },
+    "check": {
+      "desc": "Run fmt and lint",
+      "cmd": ["deno fmt --check", "deno lint --unstable --ignore=./README.md"]
+    }
+  }
+}
